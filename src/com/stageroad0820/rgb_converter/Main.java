@@ -96,7 +96,7 @@ public class Main extends JFrame{
 			
 			System.out.println("[Log:Info] 파일의 세부 정보를 수집했습니다. 높이: " + height + ", 너비: " + width);
 			
-			int alpha, red, green, blue, pixel;
+			int red, green, blue, pixel;
 			
 			int confirm = JOptionPane.showConfirmDialog(null
 					, "파일 입력을 시작하기 전 아래의 내용을 확인하시고 진행해 주세요.\n파일의 크기가 클 수록 파일 입력은 오래걸립니다.\n\n- 이미지 높이: " + height + " px\n- 이미지 너비: " + width + " px"
@@ -108,18 +108,17 @@ public class Main extends JFrame{
 				
 				msgbox("info", "파일 입력 시작", "파일 입력을 시작합니다. 파일 크기에 따라 시간이 다소 걸릴 수 있습니다.");
 				
-				output.write("- Pixel: x, y > [alpha, red, green, blue]\r\n");
+				output.write("Red,Green,Blue");
 				
 				for (int i = 0; i < height; i++) {
 					for (int j = 0; j < width; j++) {
 						pixel = bf_img.getRGB(j, i);
-						alpha = (pixel >> 24) & 0xff;
 						red = (pixel >> 16) & 0xff;
 						green = (pixel >> 8) & 0xff;
 						blue = pixel & 0xff;
 						
-						String contents = "- Pixel: " + j + ", " + i + " > [" + alpha + ", " + red + ", " + green + ", " + blue + "]\r\n";
-						System.out.println("[Log:Info] 파일 입력 중 입니다. 현재 픽셀: " + j + ", " + i + " / RGB 값: [" + alpha + ", " + red + ", " + green + ", " + blue +"]");
+						String contents = red + "," + green + "," + blue + "\r\n";
+						System.out.println("[Log:Info] 파일 입력 중 입니다. 현재 픽셀: " + j + ", " + i + " / RGB 값: [" + red + ", " + green + ", " + blue +"]");
 						output.write(contents);
 					}
 				}
@@ -167,7 +166,7 @@ public class Main extends JFrame{
 		JButton btn_load = new JButton();
 		JPanel pmain = new JPanel();
 		
-		fmain.setTitle("RGB Converter v0.1.0 [Beta]");
+		fmain.setTitle("RGB Converter v0.1.1 [Beta]");
 		fmain.setSize(800, 450);
 		
 		btn_load.setText("사진 불러오기");
